@@ -1,0 +1,12 @@
+#Calulator{
+    border: 1px solid rgb(12, 12, 17);
+    border-radius: 5px;
+    width: 200px;
+}
+
+#display {
+    margin: 10px;
+    width: 85%;
+
+}
+
