@@ -22,3 +22,6 @@ urlpatterns = [
     path('',include('myapp.urls')),
 
 ]
+
+handler404 = 'Demo.views.myhandler'
+

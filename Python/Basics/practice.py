@@ -10,3 +10,5 @@ sqr = int(input( " Enter Number 1 :"))
 print(sqr**2)
 
 
+
+

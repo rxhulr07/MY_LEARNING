@@ -22,6 +22,14 @@ b = int(input("Enter number 2 : ")) # do type conversion
 print(type(b)) # int
 
 
+combination = [ "Apple", "Orange" , 5, 345.06, False, "Aakash", "Rohan" ]
+combination[0] = "Grapes"  #unlike string list can be immutable
 
+print(combination[0])
+
+
+
+
+ 
 
 
