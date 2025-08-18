@@ -1,17 +1,9 @@
-{% load static %} <!-- first tell app to load static files by using template engine-->
+{% extends "layout.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="../../static/style.css"> this wont work -->
-     <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- then tell which static files to load by using template engine-->
-      
+{% block title %}
+Rahul Home Page
+{% endblock%}
 
-</head>
-<body>
-    <h1>hi rahul</h1>
-</body>
-</html>
+{% block content %}
+<h1>All page is yours</h1>
+{% endblock%}
