@@ -1,8 +1,11 @@
 const express = require('express');
 const users = require("./MOCK_DATA.json");
-
+const fs = require('fs');
+const { stat } = require('fs/promises');
 const app = express();
 PORT = 3000;
+
+app.use(express.urlencoded({extended: true}));
 
 app.get("/users", (req ,res)=>{
 
@@ -23,11 +26,49 @@ app.route("/api/users/:id")
     res.send(`<h1>${data}</h1>`);
     // res.send(user.first_name);
 })
+.post((req, res)=>{
+    const body = req.body;
+    users.push({id: users.length +1, ...body})
+    fs.writeFile('MOCK_DATA.json',JSON.stringify(users), (err)=>{
+        if (err) {
+      return res.status(500).json({ status: "error", message: "Failed to save data" });
+    }
+        res.json({status: "succes", id: users.length});
+    });
+      
+
+})
 .patch((req, res)=>{
+    const id = (Number)(req.params.id);
+    const body = req.body;
+    const UpdateUser = users.find(u=> u.id === id);
+
+    if(UpdateUser){
+      Object.assign(UpdateUser , body); // it will copy or update the content of updateuser from body;
+        fs.writeFile("MOCK_DATA.json", JSON.stringify(users), (err) => {
+        if (err) {
+            return res.status(500).json({ status: "error", message: "Failed to update user" });
+        }
+
+        res.json({ status: "success", message: "User updated successfully", user });
+    });
+         
+    }
 
 })
 .delete((req, res)=>{
-    
+    const id = (Number)(req.params.id);
+    const DeleteUser = users.find(u=> u.id === id);
+
+    if(DeleteUser){
+       const newList= users.filter(u => u.id !== DeleteUser.id);  
+        fs.writeFile('MOCK_DATA.json', JSON.stringify(newList), ()=>{
+            users.splice(0, users.length, ...newList);  //  it will remove all the elemnts and push new elemnts list
+            res.json({status: "User Deleted Successfully"});
+        });
+
+    }
+
 })
 
 
