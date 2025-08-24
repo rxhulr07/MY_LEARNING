@@ -5,7 +5,21 @@ const { stat } = require('fs/promises');
 const app = express();
 PORT = 3000;
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true})); // convert form data into object and put in body
+
+// app.use((req, res , next)=>{
+//     console.log("Hello from middleware 1");
+//     next(); // it will forwad to next function, if dont use it res will get stuck in loop
+// })
+
+app.use((req, res, next)=>{
+    fs.appendFile('log.txt', `${Date.now()}: ${req.method} ${req.path} `, (err)=>{
+        if(err){
+        console.log("error writing file");
+        }
+    })
+    next();
+})
 
 app.get("/users", (req ,res)=>{
 
