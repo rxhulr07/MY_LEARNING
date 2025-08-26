@@ -1,0 +1,126 @@
+CREATE DATABASE practice;
+
+SET SQL_SAFE_UPDATES = 0; -- if you want to update you need to disable safe mode--
+
+USE practice;
+CREATE TABLE student(
+rollno INT PRIMARY KEY,
+name VARCHAR(20),
+marks VARCHAR(1),
+city  VARCHAR(10)
+);
+
+INSERT INTO student
+(rollno , name , marks , city)
+VALUES
+(1, 'Arjun', 'A', 'Delhi'),
+(2, 'Meena', 'B', 'Mumbai'),
+(3, 'Ravi', 'C', 'Kolkata'),
+(4, 'Sneha', 'A', 'Chennai'),
+(5, 'Kiran', 'B', 'Bangalore'),
+(6, 'Anita', 'C', 'Pune'),
+(7, 'Rahul', 'B', 'Hyderabad');
+
+alter table student
+add column grade varchar(1);
+
+
+UPDATE student 
+set grade = marks;
+
+select * FROM student;
+
+UPDATE student
+set marks = null;
+
+ALTER TABLE student
+MODIFY COLUMN marks INT;
+
+update student
+set marks = case rollno
+
+when 1 then 89
+when 2 then 78
+when 3 then 90
+when 4 then 29
+when 5 then 85
+when 6 then 89
+when 7 then 99
+end;
+
+INSERT INTO student (rollno, name, marks, city, grade)
+VALUES
+(10, 'Amit', 92, 'Delhi', 'A'),
+(11, 'Sanya', 76, 'Mumbai', 'B'),
+(12, 'Vivek', 85, 'Bangalore', 'B'),
+(13, 'Neeta', 68, 'Chennai', 'C'),
+(14, 'Rohan', 54, 'Pune', 'C'),
+(15, 'Isha', 88, 'Hyderabad', 'B'),
+(16, 'Kunal', 73, 'Kolkata', 'C'),
+(17, 'Priya', 95, 'Delhi', 'A'),
+(18, 'Ankit', 61, 'Mumbai', 'C'),
+(19, 'Tanvi', 80, 'Bangalore', 'B'),
+(20, 'Ritesh', 77, 'Chennai', 'B'),
+(21, 'Shreya', 69, 'Pune', 'C'),
+(22, 'Dev', 82, 'Hyderabad', 'B'),
+(23, 'Maya', 91, 'Kolkata', 'A'),
+(24, 'Kabir', 58, 'Delhi', 'C'),
+(25, 'Sonal', 87, 'Mumbai', 'B'),
+(26, 'Aditya', 73, 'Bangalore', 'C'),
+(27, 'Riya', 94, 'Chennai', 'A'),
+(28, 'Aarav', 66, 'Pune', 'C'),
+(29, 'Simran', 79, 'Hyderabad', 'B');
+
+-- task for day 1--
+
+select * FROM student
+WHERE city = 'Delhi';
+
+select * from student
+WHERE marks >80 and grade = 'A';
+
+select * from student 
+ORDER BY marks desc;  
+
+select max(marks) from student;
+
+select * from student
+where marks = (select max(marks) from student);
+
+select avg(marks) from student;
+
+select * from student 
+where marks > (select avg(marks) from student);
+
+select count(grade) from student 
+-- selct count(*) from student ... will  also work same
+where grade = 'B';
+
+select * from student
+-- where name like 'A%';
+where name like 'A____'; --  use underscore when you need fixed charcter size means one underscore will return name having one charcter
+
+select * from student 
+-- where city IN('Mumbai', 'Delhi'); 
+where city NOT IN('Mumbai', 'Delhi');
+
+update student
+set grade = case
+when marks >= 90 then 'A'
+when marks >= 75 and marks <90 then 'B'
+else 'C'
+end;
+
+select * from student;
+
+Delete from student
+where marks < 30;
+
+update student 
+set marks = case rollno
+when 1 then 26
+end;
+
+
+
+
