@@ -5,7 +5,7 @@ SET SQL_SAFE_UPDATES = 0; -- if you want to update you need to disable safe mode
 USE practice;
 CREATE TABLE student(
 rollno INT PRIMARY KEY,
-name VARCHAR(20),
+name VARCHAR(20),S
 marks VARCHAR(1),
 city  VARCHAR(10)
 );
