@@ -62,6 +62,14 @@ Select d.department_name, e.employee_id AS employee_details
 on e.department_id = d.department_id
 where d.department_id is null;
 
-select e.manager_name , e.employee_name
-from
+select e.name AS employee_name,
+       m.name As  manager_name,
+       d.department_name
+from employee e
+left join employee m
+on e.manager_id = m.employee_id
+left join departments d
+on d.department_id = e.department_id;
+
+       
 
