@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Submit Your Information</h2>
+        <h1>{{name}}</h1>
+        {% for i in check%}
+            <li>{{i}}</li>
+            {% endfor %}
+        <form action="" method="post">
+            {% csrf_token %} 
+            <input type="text" id="name" name="name" placeholder="Enter Username" required>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            <br><br>
+            <label><input type="checkbox" name="hobbies" value="Reading"> Reading</label><br>
+            <label><input type="checkbox" name="hobbies" value="Traveling"> Traveling</label><br>
+            <label><input type="checkbox" name="hobbies" value="Gaming"> Gaming</label><br>
+            <input type="radio" value="male" name="gender">Male <br>
+            <input type="radio" value="female" name="gender">Female <br>
+            <input type="radio" value="other" name="gender"> Other
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+         {% if name and password %}
+            <p><strong>Name:</strong> {{ name }}</p>
+            <p><strong>Password:</strong> {{ password }}</p>
+            <p><strong>Hobbies:</strong> {{ hobbies|join:", " }}</p>
+            <p><strong>Gender:</strong> {{gender}}</p>  
+        {% endif %} 
+        
+    </div>
+</body>
+</html>
